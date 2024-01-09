@@ -21,7 +21,7 @@ Rozpoznawanie głosu to umiejętność wykonywania przez urządzenie identyfikac
 
 \begin{figure}[h]
     \centering
-    \includegraphics{files/ad.jpg}
+    \includegraphics[width=0.95\linewidth]{files/ad.jpg}
     \caption{Konwersja A/D. (Źródło: \url{https://wiki.analog.com/university/courses/electronics/text/chapter-20})}
     \label{fig:ad}
 \end{figure}
@@ -47,7 +47,7 @@ Język \textit{naturalny} podzielić można na dwie kategorie komunikacji: niewe
 Komunikację werbalną, która opiera się na języku mówionym, w przetwarzaniu języka naturalnego można zobrazować jako widoczny na Rys.\ref{fig:nlp} proces przetwarzania dźwięku wydanego przez człowieka na wyrazy, a następnego ekstrakcję znaczenia i informacji z przekazu.
 
 \begin{center}
-    \includegraphics[width=12cm]{files/nlp.png}
+    \includegraphics[width=0.95\linewidth]{files/nlp.png}
     \captionof{figure}{Przetwarzanie języka naturalnego.}
     \label{fig:nlp}
 \end{center}
@@ -62,7 +62,7 @@ Do procesu przetwarzania języka naturalnego można podejść na wiele sposobów
 Z uwagi na fakt, że język mówiony ciągle się zmienia, tj. tworzone są nowe zasady, formy gramatyczne oraz słowa, aby nadążyć za rozwojem ludzkości, implementacja wszystkich rządzących nim praw jest uciążliwa i czasochłonna. W związku z tym, systemy te często poza konkretnymi regułami, opierają się również na wykluczeniu niewystępujących naturalnie scenariuszy konwersacji. Bazując na tym systemie, proces przetwarzania przebiega następująco (Rys. \ref{fig:symbolic}): na podstawie charakterystyki danego zadania, tworzone są reguły spełniające założenia. Reguły te są iteracyjnie nakładane na dane wejściowe celem znalezienia istniejących wzorców i procesowane zgodnie z otrzymanymi rezultatami aby zwiększyć dokładność algorytmu. 
 
 \begin{center}
-    \includegraphics[width=12cm]{files/symbolic.png}
+    \includegraphics[width=0.95\linewidth]{files/symbolic.png}
     \captionof{figure}{Symboliczne przetwarzanie języka naturalnego.}
     \label{fig:symbolic}
 \end{center}
@@ -84,14 +84,15 @@ W przypadku, gdy dane zadanie posiada wiele złożonych scenariuszy, stosowane s
 Na osiągnięte przez model rezultaty, wpływa nie tylko jakość danych, ale również sposób, w jaki informacje z nich są wyciągane. Podając algorytmowi do przetworzenia przykładowe zdanie, do wyciągnięcia informacji może on użyć \textit{kodowania 1 z n} (Rys. \ref{fig:one-hot}), gdzie w wektorze n-wymiarowym każdy element może mieć wartość 1 lub 0 w zależności czy w zdaniu o długości n występuje słowo istniejące w słowniku, czy nie. Do podejścia tego, można dołożyć częstość występowania słów, gdzie w wektorze odnoszącym się do danego słowa, zamiast 1 podana będzie jego liczność. 
 
 \begin{center}
-    \includegraphics[width=10cm]{files/one-hot.png}
+    \includegraphics[width=0.6\linewidth]{files/one-hot.png}
     \captionof{figure}{Kodowanie 1 z n. (Źródło: \url{https://www.tensorflow.org/text/guide/word_embeddings})}
     \label{fig:one-hot}
 \end{center}
 
 Nie tylko ze zdań można wyciągać informacje służące do przewidywania kolejnych elementów, ale również znaków czy sekwencji słów. Używając modeli \textit{n-gram}, które tworzą wektor wystąpień nie pojedynczego słowa, ale dwóch (bigrams) lub trzech (trigrams) (Rys.\ref{fig:n-gram}), można znacznie zwiększyć skuteczność modelu, ponieważ bierze on pod uwagę kontekst występowania słów w sekwencji. 
+
 \begin{center}
-    \includegraphics[width=10cm]{files/n-grams.png}
+    \includegraphics[width=0.8\linewidth]{files/n-grams.png}
     \captionof{figure}{Unigram, bigram i trigram. (Źródło: \url{https://devopedia.org/n-gram-model#Mehmood-2019})}
     \label{fig:n-gram}
 \end{center}
@@ -108,7 +109,7 @@ Używając uczenia nadzorowanego, wektory zawierające cechy każdego ze słów 
 Współczesne systemy do rozpoznawania głosu bazują na ukrytym modelu Markova (hidden Markov model). Model ten opisuje obserwowalny proces (Rys. \ref{fig:markov}) A, którego rezultat zależy od rezultatu procesu E. Ponieważ stan E nie jest obserwowalny, jego stan może być znaleziony poprzez obserwację stanu A. Jest to adekwatne przedstawienie tego, czym jest proces występowania każdego po sobie wyrazu w zdaniu. Na podstawie ciągu składającego się ze znanego słowa i kolejnego, które wystąpi po nim, możliwe jest statystyczne przybliżenie wartości słowa nieznanego. Następnie w tym procesie sieci neuronowe rekurencyjnie używają danych wyjściowych z modelu dla poprzedniego kroku do wpłynięcia na dane wejściowe do kolejnego w sekwencji. 
 
 \begin{center}
-    \includegraphics[width=10cm]{files/markov.png}
+    \includegraphics[width=0.5\linewidth]{files/markov.png}
     \captionof{figure}{Diagram przedstawiający proces Markova. (Źródło: \url{https://commons.wikimedia.org/wiki/File:Markovkate_01.svg})}
     \label{fig:markov}
 \end{center}
