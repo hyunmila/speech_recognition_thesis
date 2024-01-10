@@ -9,7 +9,7 @@ Panel HMI maszyny może być używany między innymi do:
     \item wizualizacji danych,
     \item śledzenia procesów.
 \end{itemize}
-Panele takie często są budowane do wytrzymywania w ekstremalnych warunkach w zakładach przemysłowych i fabrykach i przystosowywane do działania na odległość. Ich powstanie jest powiązane głównie z potrzebą optymalizacji - dzięki urządzeniom monitorującym procesy zdalnie, pracownicy zakładów zamiast marnować czas na sprawdzanie każdej maszyny, mogą to zrobić w jednym, dedykowanym do tego miejscu. 
+Panele takie często są budowane do wytrzymywania w ekstremalnych warunkach w zakładach przemysłowych i fabrykach i przystosowywane do działania na odległość. Ich powstanie jest powiązane głównie z potrzebą optymalizacji - dzięki urządzeniom monitorującym procesy zdalnie, pracownicy zakładów zamiast marnować czas na sprawdzanie każdej maszyny po kolei, mogą to zrobić w jednym, dedykowanym do tego miejscu. 
 
 %---------------------------------------------------------------------------
 
@@ -18,9 +18,9 @@ Panele takie często są budowane do wytrzymywania w ekstremalnych warunkach w z
 
 Stanowiskiem pracy jest urządzenie z systemem operacyjnym Ubuntu 20.04. W celach użycia narzędzia \textit{Gazebo} \cite{gazebo} służącego do symulowania systemów w czasie rzeczywistym, zainstalowano środowisko \textit{Robot Operating System} (skr.: ROS) \cite{ros}. 
 
-ROS \cite{ros} jest to otwarte oprogramowanie posiadające zestaw bibliotek i narzędzi umożliwiający budowanie aplikacji dla robotów, kompatybilne z językiem programowania \textit{Python}. Dystrybucja zainstalowana na urządzeniu to \textit{ROS Noetic Ninjemys} \cite{noetic}, odmiana dedykowana dla używanego systemu operacyjnego z długoterminowym wsparciem ze strony producenta. 
+ROS \cite{ros} jest to otwarte oprogramowanie posiadające zestaw bibliotek i narzędzi umożliwiających budowanie aplikacji dla robotów, kompatybilne z językiem programowania \textit{Python}. Dystrybucja zainstalowana na urządzeniu to \textit{ROS Noetic Ninjemys} \cite{noetic}, odmiana dedykowana dla używanego systemu operacyjnego z długoterminowym wsparciem ze strony producenta. 
 
-Do zobrazowania działania algorytmu w symulacji został użyty model TurtleBot3 \cite{turtlebot}. Jest to robot, którego nazwa, wygląd, a nawet sposób poruszania bazuje na Turtle, popularnym robocie będącym integralną częścią języka programowania Logo \cite{logo}. Wybrany model robota to \textit{waffle} \ref{fig:gazebo}.
+Do zobrazowania działania algorytmu w symulacji został użyty model TurtleBot3 \cite{turtlebot}. Jest to robot, którego nazwa, wygląd, a nawet sposób poruszania bazuje na Turtle, popularnym robocie będącym integralną częścią języka programowania Logo \cite{logo}. Wybrany model robota to \textit{waffle} (Rys. \ref{fig:gazebo}).
 
 \begin{center}
     \includegraphics[width=0.8\linewidth]{files/gazebo.png}
@@ -32,7 +32,7 @@ Monitorowanie zaimplementowanego sterowania robotem umożliwia narzędzie \texti
 
 \begin{center}
     \includegraphics[width=0.8\linewidth]{files/rqt_view.png}
-    \captionof{figure}{Widok aplikacji rqt.}
+    \captionof{figure}{Widok aplikacji rqt wraz z uruchomioną symulacją poruszania się robota.}
     \label{fig:rqt}
 \end{center}
 
@@ -44,31 +44,43 @@ Wymienione powyżej narzędzia służą głównie usprawnieniu pracy w środowis
     \label{fig:diagram}
 \end{center}
 
-Samo przekazanie przez panel komend robotowi odbywa się za pomocą narzędzia \textit{ROS Topic} (z ang. tematy). Tematami w środowisku ROS można określić instancje odpowiedzialne za przekazywanie wiadomości (ang. \textit{messages}) pomiędzy węzłami (ang.\textit{nodes}). Aby nadać jakąś wiadomość na dany temat używany jest \textit{ROS Publisher} (z ang. nadawca). Wiadomość taką może odebrać \textit{ROS Subscriber} (z ang. odbiorca). W widocznym na Rys. \ref{fig:diagram} przebiegu programu, aby umożliwić poruszanie się robota, na temat \textit{cmd-vel}, odpowiedzialny za prędkość kół robota, nadawana jest wiadomość zawierająca pożądaną wartość prędkości kół. Robot, jako subskrybent tego tematu odbiera wiadomość w tym temacie i zaczyna poruszanie się z tą prędkością. 
+Samo przekazanie przez panel komend robotowi odbywa się za pomocą narzędzia \textit{ROS Topic} (z ang. temat). Tematami w środowisku ROS można określić instancje odpowiedzialne za przekazywanie wiadomości (ang. \textit{messages}) pomiędzy węzłami (ang. \textit{nodes}). Aby nadać jakąś wiadomość na dany temat używany jest \textit{ROS Publisher} (z ang. nadawca). Wiadomość taką może odebrać \textit{ROS Subscriber} (z ang. odbiorca). W widocznym na Rys. \ref{fig:diagram} przebiegu programu, aby umożliwić poruszanie się robota, na temat \textit{cmd-vel}, odpowiedzialny za prędkość kół robota, nadawana jest wiadomość zawierająca pożądaną wartość prędkości kół. Robot, jako subskrybent tego tematu odbiera wiadomość w tym temacie i zaczyna poruszanie się z tą prędkością. 
 
 %---------------------------------------------------------------------------
 
 \section{Aplikacja}
 \label{sec:App}
 
-W projekcie w celu wykonania panelu służącego do sterowania głosowego urządzeniem użyto biblioteki dla Pythona \textit{CustomTkinter} \cite{ctk}. Umożliwia ona prostą w obsłudze budowę aplikacji i dostosowanie ich pod potrzeby wizualne użytkownika. 
+W projekcie w celu wykonania panelu służącego do sterowania głosowego urządzeniem użyto biblioteki dla Pythona \textit{CustomTkinter} \cite{ctk}. Umożliwia ona prostą w obsłudze budowę aplikacji i dostosowanie ich pod potrzeby wizualne użytkownika.
 
-Podstawowym elementem programu jest widoczny na Rys. \ref{fig:panel_1} panel. Przyciski \textit{start} oraz \textit{stop} służą do zmiany stanu robota na ruch lub oczekiwanie. Przy przycisku \textit{start} znajduje się opcjonalne pole służące do wprowadzenia prędkości poruszania się robota. Przycisk \textit{voice recognition} otwiera okno służące do sterowania głosowego \ref{fig:panel_2}.
+Podstawowym elementem programu jest widoczny na Rys. \ref{fig:panel_1} panel. Przyciski \textit{start} oraz \textit{stop} służą do zmiany stanu robota na ruch lub oczekiwanie. Przy przycisku \textit{start} znajduje się opcjonalne pole służące do wprowadzenia prędkości poruszania się robota. Jest to prędkość liniowa (ang. linear), pozwalająca robotowi na jazdę w przód oraz w tył. Prędkość kątowa (ang. angular) pozwala robotowi na skręcanie w lewo lub w prawo. 
 \begin{center}
-    \includegraphics[width=0.95\linewidth]{files/panel_1.png}
+    \includegraphics[width=0.8\linewidth]{files/panel_1.png}
     \captionof{figure}{Główne okno panelu HMI.}
     \label{fig:panel_1}
 \end{center}
 
-Widoczny na Rys. \ref{fig:panel_2} panel posiada przycik \textit{start/stop speaking} uruchamiający lub zatrzymujący sterowanie głosowe. Ponad to, na polu obok wyświetlane są komendy programu w czasie rzeczywistym. 
+Sterowanie może przebiegać za pomocą zarówno trybu głosowego jak i manualnego. Przycisk \textit{voice recognition} otwiera okno służące do sterowania głosowego. Widoczny na Rys. \ref{fig:panel_2} panel posiada przycik \textit{start/stop speaking} uruchamiający lub zatrzymujący sterowanie głosowe. Ponad to, na polu obok wyświetlane są komendy programu w czasie rzeczywistym.
 
 \begin{center}
-    \includegraphics[width=0.95\linewidth]{files/panel_2.png}
+    \includegraphics[width=0.8\linewidth]{files/panel_2.png}
     \captionof{figure}{Okno panelu HMI służące do sterowania głosowego.}
     \label{fig:panel_2}
 \end{center}
 
-Sterowanie może przebiegać za pomocą ...
-dwa panele
-rtq
-poruszanie sie liniowe i angular
+\break
+Monitorowanie sterowania robotem jest możliwe dzięki wykorzystaniu wspomnianego wcześniej narzędzia \textit{rqt} \cite{rqt}. Na Rys. \ref{fig:rqt2} widoczny jest wykres wiadomości publikowanych przez robota w temacie \textit{cmd-vel} o jego prędkości liniowej w osi x.
+
+\begin{center}
+    \includegraphics[width=0.9\linewidth]{files/rqt2.png}
+    \captionof{figure}{Prędkość liniowa robota w czasie.}
+    \label{fig:rqt2}
+\end{center}
+
+Natomiast z wykresu widocznego na Rys. \ref{fig:rqt3} można odczytać wartości publikowane przez symulację w temacie \textit{pose}, informującym o pozycji robota.
+
+\begin{center}
+    \includegraphics[width=0.9\linewidth]{files/rqt3.png}
+    \captionof{figure}{Pozycja robota w symulacji w czasie.}
+    \label{fig:rqt3}
+\end{center}
