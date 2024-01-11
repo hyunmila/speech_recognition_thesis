@@ -3,7 +3,7 @@
 
 Sterowanie za pomocą komend głosowych może stać się o wiele cięższe w wykonaniu, kiedy w grę wchodzą czynniki takie jak akcent, inny niż stosowany w algorytmie język, dźwięki w tle, złożoność polecenia czy nawet niewyraźna mowa. Z uwagi na ten fakt, algorytm do rozpoznawania mowy używany w programie został poddany scenariuszom testowym. 
 
-Na potrzeby testów stworzono pięć zestawów tych samych dziesięciu poleceń, różniących się pomiędzy sobą kilkoma czynnikami:
+Na potrzeby testów przy użyciu darmowego narzędzia do generacji mowy \cite{conv} stworzono pięć zestawów tych samych dziesięciu poleceń, różniących się pomiędzy sobą kilkoma czynnikami:
 \begin{itemize}
     \item oryginalny zestaw komend w języku angielskim z akcentem amerykańskim \textit{[EN]},
     \item wersja w języku angielskim z akcentem amerykańskim, gdzie prędkość nagrania to 2.0 \textit{[EN-0-2]},
@@ -14,7 +14,7 @@ Na potrzeby testów stworzono pięć zestawów tych samych dziesięciu poleceń,
 
 Do zestawów danych została dołożona również wersja polska, celem sprawdzenia użyteczności algorytmu w wypadku implementacji na fizycznym urządzeniu. Modyfikacje prędkości, tonacji i akcentów zostały wykonane na potrzeby zróżnicowania danych i wprowadzenia trudności dla algorytmu do zrozumienia komend. 
 
-Używając metryki WER \ref{eq:wer} została obliczona średnia wartość błędu w skali od 0 do 1 dla każdego z zestawów danych, widoczna na wykresie \ref{fig:dts1}. Można na nim zauważyć, że zgodnie z oczekiwaniami, zestaw \textit{[EN]} oryginalnych komend w języku angielskim posiada najmniejszą wartość błędu. Zarówno zestaw z akcentem Indii \textit{[EN-IN]} jak ten z akcentem Hong Kongu radzą sobie równie dobrze. Najbardziej wyróżnia się zestaw komend po polsku \textit{[PL]}, ze względu na niewystępujące w transkrypcji znaki łacińskie.
+Używając metryki WER \ref{eq:wer} została obliczona średnia wartość błędu dla każdego z zestawów danych, widoczna na wykresie \ref{fig:dts1}. Można na nim zauważyć, że zgodnie z oczekiwaniami, zestaw \textit{[EN]} oryginalnych komend w języku angielskim posiada najmniejszą wartość błędu. Zarówno zestaw z akcentem Indii \textit{[EN-IN]} jak ten z akcentem Hong Kongu radzą sobie równie dobrze. Najbardziej wyróżnia się zestaw komend po polsku \textit{[PL]}, ze względu na niewystępujące w transkrypcji znaki łacińskie.
 
 \begin{center}
     \includegraphics[width=0.7\linewidth]{files/output1.png}
@@ -30,31 +30,34 @@ Po uwzględnieniu w transkrypcji znaków łacińskich, można zauważyć na wykr
     \label{fig:dts2}
 \end{center}
 
+\break
+
 Dane w zestawach dzielą się na dwie kategorie pod względem długości polecenia:
 \begin{itemize}
-    \item proste komendy poniżej 15 znaków \textit{[słowa krótkie]},
-    \item bardziej złożone komendy powyżej 15 znaków \textit{[słowa długie]}.
+    \item proste komendy poniżej 15 znaków \textit{[komendy krótkie]},
+    \item bardziej złożone komendy powyżej 15 znaków \textit{[komendy długie]}.
 \end{itemize}
 
-% dopisz tu cos TODO
-% czy dodawac reference  do stronki konwertera
+Wśród krótkich komend można znaleźć polecenia jazdy do przodu, do tyłu, zatrzymania się czy ustawienia prędkości, natomiast wśród długich polecenia jazdy ze skrętem w różne strony. Na wykresie \ref{fig:dts3} można zauważyć znaczącą przewagę w rozpoznawaniu przez algorytm bardziej złożonych komend. Jest to prawdopodobnie spowodowane za dużą prostotą krótkich komend - część z nich to pojedyncze słowa, które bez dalszego kontekstu są niezrozumiałe dla algorytmu i nie jest w stanie on określić ich znaczenia. 
 
 \begin{center}
     \includegraphics[width=0.7\linewidth]{files/output3.png}
-    \captionof{figure}{Średnia wartość błędu dla słów krótkich i słów długich}
+    \captionof{figure}{Średnia wartość błędu dla komend krótkich i długich}
     \label{fig:dts3}
 \end{center}
 
-%  jeszcze wykres x to slowa y to srednie rozpoznawanie ich? - nwm zobacze rano
-% analiza tych zestawow danych, gdzie jest modyfikacja - WAZNE
+Aby zagłębić się w strukturę czytelności poleceń, dla zestawów danych w języku angielskim z modyfikacjami została obliczona również średnia wartość błędu dla każdej z komend, która może zostać odczytana z wykresu \ref{fig:dts4}. Dla porównania, na wykresie została umieszczona wartość błędu dla oryginalnego zestawu poleceń w języku angielskim.
+
+\begin{center}
+    \includegraphics[width=0.7\linewidth]{files/output5.png}
+    \captionof{figure}{Średnia wartość błędu dla każdej z komend}
+    \label{fig:dts4}
+\end{center}
+
+Jak wspomniano wcześniej, można zaobserwować znaczącą różnicę w rozpoznawalności krótkich poleceń, jak na przykład \textit{stop}, polecenie posiadające najwyższą średnią wartość błędu - niezrozumienia przez algorytm. Analizując wykres można dojść do wniosku, że algorytm w miarę sprawnie radzi sobie z rozpoznawaniem mowy nawet jeśli jest ona zmodyfikowana w jakiś sposób. Pomimo, że jest to bardzo mała próbka zestawu danych i może nie dostarczać w pełni wiarygodnych wyników, jednak spełnia aktualne potrzeby programu.
+
+
 % tutaj jeszcze mozna wrzucic testy samego robota - nie wiem jeszcze jak
 
-% Scenariusze testowe:
-% 1. inny akcent niz eng-us - indi
-% 1. mowa po polsku - czy w ogole rozpoznaje język?
-% 2. złożone komendy
-% 3. muzyka np w tle/bardzo cicho
-% chin - pitch -20, speed -0.5
-% indi - speed 2.0
 
 %---------------------------------------------------------------------------

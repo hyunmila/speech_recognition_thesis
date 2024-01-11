@@ -130,14 +130,20 @@ Używaną do ewaluacji metryką jest \textit{WER - Word Error Rate}, która licz
     WER = \frac{S+I+D}{N}
 \end{equation}
 
-Do ewaluacji został wykorzystany zestaw danych \textit{edinburghcstr/ami} huggingface t\cite{dataset-eval}, składający się ze 100 godzin nagrań spotkań w języku angielskim. Przy użyciu biblioteki \textit{jiwer} \cite{jiwer}, przeprowadzono ewaluację powyższych algorytmów na podstawie zestawu danych \cite{dataset-eval}. Wyniki zostały przedstawione w tabeli \ref{tab:tab1}, gdzie wartość przy nazwie algorytmu jest wartością błędu każdego z nich w skali od 0 do 1.
-\begin{table}[h]
-    \centering
-    \caption{Ewaluacja WER}
-    \begin{tabular}{c|c|c}
-        Wav2Vec & Whisper & SpeechRecognition  \\ 
-        0.736557 & 0.713998 & 0.514967
-    \end{tabular}
-    \label{tab:tab1}
-\end{table}
+Do ewaluacji został wykorzystany zestaw danych \textit{edinburghcstr/ami} huggingface t\cite{dataset-eval}, składający się ze 100 godzin nagrań spotkań w języku angielskim. Przy użyciu biblioteki \textit{jiwer} \cite{jiwer}, przeprowadzono ewaluację powyższych algorytmów na podstawie zestawu danych \cite{dataset-eval}. Wyniki zostały przedstawione na wykresie \ref{fig:dts0}, gdzie wartość przy nazwie algorytmu jest wartością błędu każdego z nich.
+% \begin{table}[h]
+%     \centering
+%     \caption{Ewaluacja WER}
+%     \begin{tabular}{c|c|c}
+%         Wav2Vec & Whisper & SpeechRecognition  \\ 
+%         0.736557 & 0.713998 & 0.514967
+%     \end{tabular}
+%     \label{tab:tab1}
+% \end{table}
+\begin{center}
+    \includegraphics[width=0.7\linewidth]{files/output0.png}
+    \captionof{figure}{Ewaluacja WER}
+    \label{fig:dts0}
+\end{center}
+
 Oczywiście, wyniki te różnią się znacznie od podanych w pracach na temat wspomnianych powyżej algorytmów wartości zarówno z uwagi na fakt umieszczenia ich w lokalnym środowisku na maszynie bez jednostki obliczeniowej GPU, ale również jakości zestawu danych walidującego poprawność działania. Z uwagi na fakt prostoty w obsłudzie i najniższego współczynnika błędu, w dalszej części pracy jako algorytm będący podstawą działania panelu do sterowania głosowego zostało wybrane podejście zdalne i biblioteka \textit{SpeechRecognition} \cite{speechrec}.
