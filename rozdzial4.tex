@@ -18,7 +18,7 @@ Używając metryki WER \ref{eq:wer} została obliczona średnia wartość błęd
 
 \begin{center}
     \includegraphics[width=0.7\linewidth]{files/output1.png}
-    \captionof{figure}{Średnia wartość błędu}
+    \captionof{figure}{Średnia wartość błędu.}
     \label{fig:dts1}
 \end{center}
 
@@ -26,7 +26,7 @@ Po uwzględnieniu w transkrypcji znaków łacińskich, można zauważyć na wykr
 
 \begin{center}
     \includegraphics[width=0.7\linewidth]{files/output2.png}
-    \captionof{figure}{Średnia wartość błędu po uwzględnieniu znaków łacińskich}
+    \captionof{figure}{Średnia wartość błędu po uwzględnieniu znaków łacińskich.}
     \label{fig:dts2}
 \end{center}
 
@@ -41,23 +41,39 @@ Dane w zestawach dzielą się na dwie kategorie pod względem długości polecen
 Wśród krótkich komend można znaleźć polecenia jazdy do przodu, do tyłu, zatrzymania się czy ustawienia prędkości, natomiast wśród długich polecenia jazdy ze skrętem w różne strony. Na wykresie \ref{fig:dts3} można zauważyć znaczącą przewagę w rozpoznawaniu przez algorytm bardziej złożonych komend. Jest to prawdopodobnie spowodowane za dużą prostotą krótkich komend - część z nich to pojedyncze słowa, które bez dalszego kontekstu są niezrozumiałe dla algorytmu i nie jest w stanie on określić ich znaczenia. 
 
 \begin{center}
-    \includegraphics[width=0.7\linewidth]{files/output3.png}
-    \captionof{figure}{Średnia wartość błędu dla komend krótkich i długich}
+    \includegraphics[width=0.9\linewidth]{files/output3.png}
+    \captionof{figure}{Średnia wartość błędu dla komend krótkich i długich.}
     \label{fig:dts3}
 \end{center}
 
 Aby zagłębić się w strukturę czytelności poleceń, dla zestawów danych w języku angielskim z modyfikacjami została obliczona również średnia wartość błędu dla każdej z komend, która może zostać odczytana z wykresu \ref{fig:dts4}. Dla porównania, na wykresie została umieszczona wartość błędu dla oryginalnego zestawu poleceń w języku angielskim.
 
 \begin{center}
-    \includegraphics[width=0.7\linewidth]{files/output5.png}
-    \captionof{figure}{Średnia wartość błędu dla każdej z komend}
+    \includegraphics[width=0.9\linewidth]{files/output5.png}
+    \captionof{figure}{Średnia wartość błędu dla każdej z komend.}
     \label{fig:dts4}
 \end{center}
 
 Jak wspomniano wcześniej, można zaobserwować znaczącą różnicę w rozpoznawalności krótkich poleceń, jak na przykład \textit{stop}, polecenie posiadające najwyższą średnią wartość błędu - niezrozumienia przez algorytm. Analizując wykres można dojść do wniosku, że algorytm w miarę sprawnie radzi sobie z rozpoznawaniem mowy nawet jeśli jest ona zmodyfikowana w jakiś sposób. Pomimo, że jest to bardzo mała próbka zestawu danych i może nie dostarczać w pełni wiarygodnych wyników, jednak spełnia aktualne potrzeby programu.
 
+Drugim z przeprowadzonych testów był test spójności rozpoznawania mowy z obiektem w symulacji. Uruchomiono program widoczny na Rys.  \ref{fig:start_gazebo}, a następnie przy użyciu panelu do sterowania algorytm do rozpoznawania mowy z pliku. Na Rys. \ref{fig:ruch_gazebo} widoczna jest informacja zwrotna na panelu o rozpoznanej komendzie. Naciśnięcie drugi raz przycisku do rozpoznawania mowy powoduje zatrzymanie robota, a ponowne kliknięcie - ponowne uruchomienie algorytmu do rozpoznawania mowy.
+\begin{center}
+    \includegraphics[width=1\linewidth]{files/start.png}
+    \captionof{figure}{Widok okna symulacji z panelem do sterowania.}
+    \label{fig:start_gazebo}
+\end{center}
 
-% tutaj jeszcze mozna wrzucic testy samego robota - nie wiem jeszcze jak
+\begin{center}
+    \includegraphics[width=1\linewidth]{files/ruch.png}
+    \captionof{figure}{Widok okna symulacji ze sterowanym głosowo robotem.}
+    \label{fig:ruch_gazebo}
+\end{center}
 
+\begin{center}
+    \includegraphics[width=1\linewidth]{files/koniec.png}
+    \captionof{figure}{Widok okna symulacji po wykonaniu przez robota sekwencji.}
+    \label{fig:koniec_gazebo}
+\end{center}
 
+Na Rys. \ref{fig:koniec_gazebo} można zaobserwować sekwencję ruchu wykonaną przez robota, widoczną w oknie informacji zwrotnej panelu. 
 %---------------------------------------------------------------------------
