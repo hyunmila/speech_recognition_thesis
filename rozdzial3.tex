@@ -1,7 +1,8 @@
 \chapter{Panel HMI}
 \label{cha:panelHmi}
 
-Głównym celem, do którego miało za zadanie prowadzić wybranie odpowiedniego algorytmu uczenia maszynowego do rozpoznawania głosowego było wykonanie panelu HMI. HMI (ang. Human-Machine Interface) jest to z definicji panel służący do połączenia człowieka z urządzeniem lub oprogramowaniem. Pomimo, że pojęcie to określa każdy ekran umożliwiający interakcję z maszyną, jest głównie używane w kontekście przemysłowym do komunikacji ze sterownikami PLC (ang. Programmable Logic Controllers). 
+% Głównym celem, do którego miało za zadanie prowadzić wybranie odpowiedniego algorytmu uczenia maszynowego do rozpoznawania głosowego było wykonanie panelu HMI. 
+Głównym celem projektu było wybranie odpowiedniego algorytmu uczenia maszynowego do rozpoznawania głosowego, dającego się łatwo integrować z interfejsem maszyny (HMI). HMI (ang. Human-Machine Interface) jest to z definicji panel służący do połączenia człowieka z urządzeniem lub oprogramowaniem. Pomimo, że pojęcie to określa każdy ekran umożliwiający interakcję z maszyną, jest głównie używane w kontekście przemysłowym do komunikacji ze sterownikami PLC (ang. Programmable Logic Controllers). 
 Panel HMI maszyny może być używany między innymi do:
 \begin{itemize}
     \item sterowania,
@@ -16,7 +17,7 @@ Panele takie często są budowane do wytrzymywania w ekstremalnych warunkach w z
 \section{Środowisko pracy}
 \label{sec:srodPrac}
 
-Stanowiskiem pracy jest urządzenie z systemem operacyjnym Ubuntu 20.04. W celach użycia narzędzia \textit{Gazebo} \cite{gazebo} służącego do symulowania systemów w czasie rzeczywistym, zainstalowano środowisko \textit{Robot Operating System} (skr.: ROS) \cite{ros}. 
+Stanowiskiem pracy było urządzenie z systemem operacyjnym Ubuntu 20.04. W celach użycia narzędzia \textit{Gazebo} \cite{gazebo} służącego do symulowania systemów w czasie rzeczywistym, zainstalowano środowisko \textit{Robot Operating System} (skr.: ROS) \cite{ros}. 
 
 ROS \cite{ros} jest to otwarte oprogramowanie posiadające zestaw bibliotek i narzędzi umożliwiających budowanie aplikacji dla robotów, kompatybilne z językiem programowania \textit{Python}. Dystrybucja zainstalowana na urządzeniu to \textit{ROS Noetic Ninjemys} \cite{noetic}, odmiana dedykowana dla używanego systemu operacyjnego z długoterminowym wsparciem ze strony producenta. 
 
@@ -44,7 +45,7 @@ Wymienione powyżej narzędzia służą głównie usprawnieniu pracy w środowis
     \label{fig:diagram}
 \end{center}
 
-Samo przekazanie przez panel komend robotowi odbywa się za pomocą narzędzia \textit{ROS Topic} (z ang. temat). Tematami w środowisku ROS można określić instancje odpowiedzialne za przekazywanie wiadomości (ang. \textit{messages}) pomiędzy węzłami (ang. \textit{nodes}). Aby nadać jakąś wiadomość na dany temat używany jest \textit{ROS Publisher} (z ang. nadawca). Wiadomość taką może odebrać \textit{ROS Subscriber} (z ang. odbiorca). W widocznym na Rys. \ref{fig:diagram} przebiegu programu, aby umożliwić poruszanie się robota, na temat \textit{cmd-vel}, odpowiedzialny za prędkość kół robota, nadawana jest wiadomość zawierająca pożądaną wartość prędkości kół. Robot, jako subskrybent tego tematu odbiera wiadomość w tym temacie i zaczyna poruszanie się z tą prędkością. 
+Samo przekazanie przez panel komend robotowi odbywa się za pomocą narzędzia \textit{ROS Topic} (z ang. temat). Tematami w środowisku ROS można określić instancje odpowiedzialne za przekazywanie wiadomości (ang. \textit{messages}) pomiędzy węzłami (ang. \textit{nodes}). Aby nadać wiadomość na dany temat używany jest \textit{ROS Publisher} (z ang. nadawca). Wiadomość taką może odebrać \textit{ROS Subscriber} (z ang. odbiorca). W widocznym na Rys. \ref{fig:diagram} przebiegu programu, aby umożliwić poruszanie się robota, na temat \textit{cmd-vel}, odpowiedzialny za prędkość kół robota, nadawana jest wiadomość zawierająca pożądaną wartość prędkości kół. Robot, jako subskrybent tego tematu odbiera wiadomość w tym temacie i zaczyna poruszanie się z tą prędkością. 
 
 %---------------------------------------------------------------------------
 
@@ -60,7 +61,23 @@ Podstawowym elementem programu jest widoczny na Rys. \ref{fig:panel_1} panel. Pr
     \label{fig:panel_1}
 \end{center}
 
-Sterowanie może przebiegać za pomocą zarówno trybu głosowego jak i manualnego. Przycisk \textit{voice recognition} otwiera okno służące do sterowania głosowego. Widoczny na Rys. \ref{fig:panel_2} panel posiada przycik \textit{start/stop speaking} uruchamiający lub zatrzymujący sterowanie głosowe. Ponad to, na polu obok wyświetlane są komendy programu w czasie rzeczywistym.
+Sterowanie może przebiegać za pomocą zarówno trybu głosowego jak i manualnego. Przycisk \textit{voice recognition} otwiera okno służące do sterowania głosowego. Widoczny na Rys. \ref{fig:panel_2} panel posiada przycik \textit{start/stop speaking} uruchamiający lub zatrzymujący sterowanie głosowe. Ponadto, na polu obok wyświetlane są komendy programu w czasie rzeczywistym. 
+
+W trybie sterowania głosowego zostało zaimplementowane rozpoznawanie dwóch podstawowych komend, widocznych w \ref{tab:commands}, które są odbierane tak długo, jak robot ma możliwość poruszania się (brak kolizji) lub użytkownik nie zakończył działania programu.
+
+\begin{center}
+    \captionof{table}{Komendy rozpoznawane przez robota.}
+    \begin{tabular}{ |c|c|c| } 
+    \hline
+    Język & angielski & polski \\
+    \hline
+    \multirow{2}{4em}{Komenda} & go forward & jedź naprzód \\ 
+    & stop & zatrzymaj się \\ 
+    % & cell8 & cell9 \\ 
+    \hline
+    \end{tabular}
+    \label{tab:commands}
+\end{center}
 
 \begin{center}
     \includegraphics[width=0.8\linewidth]{files/panel_2.png}

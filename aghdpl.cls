@@ -322,7 +322,7 @@
 	url=false,
 	%
 	% Ustawienia związane z polskimi normami dla bibliografii.
-	maxbibnames=3,
+	maxbibnames=4,
 	% Wybór silnika generowania bibliografii:
 %	backend=bibtex  % - jeżeli używamy BibTeX-a
 	backend=biber   % - jeżeli używamy biber-a

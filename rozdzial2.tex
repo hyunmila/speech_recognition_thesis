@@ -54,9 +54,9 @@ Innym podejściem do rozpoznawania mowy jest wykorzystanie istniejącego lub zbu
 
 Głównym z problemów w kwestii dostępności danych do treningu jest różnica pomiędzy ilością danych opisanych etykietami (ang. labelled data), a nieopisanych (ang. unlabelled data). Ich proporcje są zazwyczaj bardzo nierówne - do uczenia na bazie danych audio istnieją tysiące godzin nagrań bez etykiet, w trakcie kiedy tych opisanych etykietami jest często setki razy mniej. 
 
-Jak wspomniano w \ref{subsec:symbolic} język jest rzeczą płynną, ciągle się zmieniającą w zależności od upływu czasu, szerokości i długości geograficznej czy pochodzenia. Dwie osoby mówiące tym samym językiem mogą z perspektywy technicznej używać go zupełnie inaczej modulując tonację, akcent lub dialekt. Fakt ten sprawia, że zadanie znalezienia odpowiedniej ilości danych audio nagrań spełniających wszystkie kryteria każdego języka jest sporym wyzwaniem. Z tego powodu większość zestawów danych opiera się głównie na języku angielskim, używanym przez największą część populacji \cite{mostspoken}. 
+Jak wspomniano w rozdziale \ref{subsec:symbolic} język jest rzeczą płynną, ciągle się zmieniającą w zależności od upływu czasu, szerokości i długości geograficznej czy pochodzenia. Dwie osoby mówiące tym samym językiem mogą z perspektywy technicznej używać go zupełnie inaczej modulując tonację, akcent lub dialekt. Fakt ten sprawia, że zadanie znalezienia odpowiedniej ilości danych audio nagrań spełniających wszystkie kryteria każdego języka jest sporym wyzwaniem. Z tego powodu większość zestawów danych opiera się głównie na języku angielskim, używanym przez największą część populacji \cite{mostspoken}. 
 
-Najprostszym rozwiązaniem jest użycie modelu już wytrenowanego, co umożliwia biblioteka \textit{Huggingface transformers} \cite{hf}. Zapewnia ona dostęp do wielu modeli uczenia maszynowego potrafiących rozpoznawać mowę, w tym do modelu \textit{Wav2Vec 2.0} \cite{baevski2020wav2vec} oraz \textit{Whisper} \cite{radford2022robust}.
+Najprostszym rozwiązaniem jest użycie modelu już wytrenowanego, co umożliwia biblioteka \textit{Huggingface transformers} \cite{hf}. Zapewnia ona dostęp do wielu modeli uczenia maszynowego potrafiących rozpoznawać mowę, w tym do modelu \textit{Wav2Vec 2.0} \cite{bvski} oraz \textit{Whisper} \cite{radfort}.
 
 %---------------------------------------------------------------------------
 
@@ -130,7 +130,7 @@ Używaną do ewaluacji metryką jest \textit{WER - Word Error Rate}, która licz
     WER = \frac{S+I+D}{N}
 \end{equation}
 
-Do ewaluacji został wykorzystany zestaw danych \textit{edinburghcstr/ami} huggingface t\cite{dataset-eval}, składający się ze 100 godzin nagrań spotkań w języku angielskim. Przy użyciu biblioteki \textit{jiwer} \cite{jiwer}, przeprowadzono ewaluację powyższych algorytmów na podstawie zestawu danych \cite{dataset-eval}. Wyniki zostały przedstawione na wykresie \ref{fig:dts0}, gdzie wartość przy nazwie algorytmu jest wartością błędu każdego z nich.
+Do ewaluacji został wykorzystany zestaw danych \textit{edinburghcstr/ami} huggingface \cite{dataset-eval}, składający się ze 100 godzin nagrań spotkań w języku angielskim. Przy użyciu biblioteki \textit{jiwer} \cite{jiwer}, przeprowadzono ewaluację powyższych algorytmów na podstawie zestawu danych \cite{dataset-eval}. Wyniki zostały przedstawione na wykresie \ref{fig:dts0}, gdzie wartość przy nazwie algorytmu jest wartością błędu każdego z nich.
 % \begin{table}[h]
 %     \centering
 %     \caption{Ewaluacja WER}
